@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShadowTale Renaissance | Présentation Interactive</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-purple: #0c0b1d;
+            --deep-blue: #1a1b3e;
+            --magic-purple: #6a11cb;
+            --magic-blue: #2575fc;
+            --gold: #ffd700;
+            --silver: #c0c0c0;
+            --neon-cyan: #00f3ff;
+            --neon-pink: #ff00ff;
+            --glow: 0 0 15px;
+            --transition-slow: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --transition-fast: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--dark-purple);
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4, .logo {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Effets de particules */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            top: 0;
+            left: 0;
+        }
+
+        /* Header Fantastique */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            background: rgba(12, 11, 29, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(106, 17, 203, 0.3);
+            transition: var(--transition-slow);
+        }
+
+        .header-scrolled {
+            padding: 1rem 0;
+            background: rgba(12, 11, 29, 0.95);
+            box-shadow: 0 5px 30px rgba(106, 17, 203, 0.2);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            background: linear-gradient(45deg, var(--gold), var(--silver));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: var(--glow) rgba(255, 215, 0, 0.3);
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .logo::before {
+            content: "⚔️";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.5rem;
+            animation: swordGlow 3s infinite alternate;
+        }
+
+        @keyframes swordGlow {
+            0% { filter: drop-shadow(0 0 5px var(--gold)); }
+            100% { filter: drop-shadow(0 0 15px var(--neon-cyan)); }
+        }
+
+        /* Navigation Magique */
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--silver);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition-fast);
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--magic-purple), var(--magic-blue));
+            transition: width 0.4s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--neon-cyan);
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--gold);
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section Épique */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 100px;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(106, 17, 203, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(37, 117, 252, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 243, 255, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--gold), var(--neon-cyan), var(--magic-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: titleGlow 4s infinite alternate;
+            line-height: 1.2;
+        }
+
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+            50% { text-shadow: 0 0 30px rgba(0, 243, 255, 0.7); }
+            100% { text-shadow: 0 0 20px rgba(106, 17, 203, 0.5); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--silver);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-container {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition-slow);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .cta-primary {
+            background: linear-gradient(45deg, var(--magic-purple), var(--magic-blue));
+            color: white;
+            box-shadow: 0 10px 30px rgba(106, 17, 203, 0.4);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(106, 17, 203, 0.6);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: var(--neon-cyan);
+            border: 2px solid var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.5);
+            transform: translateY(-3px);
+        }
+
+        /* Sections avec effet de parchemin */
+        .section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3.2rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            color: var(--gold);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--magic-purple), var(--magic-blue), transparent);
+        }
+
+        /* Section Histoire - Parchemin Ancien */
+        .history-section {
+            background: 
+                radial-gradient(ellipse at center, rgba(26, 27, 62, 0.9) 0%, rgba(12, 11, 29, 1) 100%),
+                url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-blend-mode: overlay;
+            background-size: cover;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        .history-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffd700' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        .history-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            background: rgba(26, 27, 62, 0.7);
+            border-radius: 20px;
+            padding: 50px;
+            border: 1px solid rgba(106, 17, 203, 0.3);
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transform-style: preserve-3d;
+            transition: var(--transition-slow);
+        }
+
+        .history-content:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 
+                0 30px 70px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .history-text {
+            flex: 1;
+        }
+
+        .history-text h3 {
+            font-size: 2.2rem;
+            color: var(--neon-cyan);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+
+        .history-text p {
+            margin-bottom: 1.5rem;
+            color: #d0d0ff;
+            font-size: 1.1rem;
+        }
+
+        .history-visual {
+            flex: 1;
+            position: relative;
+        }
+
+        .crystal-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .crystal {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, transparent 30%, rgba(106, 17, 203, 0.3) 100%);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            animation: crystalFloat 6s infinite ease-in-out;
+            position: relative;
+        }
+
+        .crystal::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(37, 117, 252, 0.2) 100%);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            animation: crystalRotate 20s infinite linear;
+        }
+
+        @keyframes crystalFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes crystalRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Section Plan - Cartes Interactives */
+        .plan-section {
+            background: linear-gradient(135deg, #0f0c29 0%, #1a1b3e 50%, #0c0b1d 100%);
+        }
+
+        .plan-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .plan-card {
+            background: rgba(26, 27, 62, 0.7);
+            border-radius: 20px;
+            padding: 40px 30px;
+            border: 1px solid rgba(106, 17, 203, 0.3);
+            transition: var(--transition-slow);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        .plan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .plan-card:hover::before {
+            left: 100%;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 20px 40px rgba(0, 243, 255, 0.2);
+        }
+
+        .plan-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--magic-blue);
+            text-shadow: 0 0 15px rgba(37, 117, 252, 0.5);
+        }
+
+        .plan-card h3 {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        /* Section Visuals - Galerie Magique */
+        .visuals-section {
+            background: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        .visuals-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(12, 11, 29, 0.85);
+        }
+
+        .visual-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .visual-item {
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: var(--transition-slow);
+        }
+
+        .visual-item:hover {
+            transform: perspective(1000px) rotateY(10deg) translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .visual-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .visual-item:hover .visual-img {
+            transform: scale(1.1);
+        }
+
+        .visual-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            padding: 2rem;
+            transform: translateY(100%);
+            transition: transform 0.6s ease;
+        }
+
+        .visual-item:hover .visual-overlay {
+            transform: translateY(0);
+        }
+
+        /* Section Roadmap - Timeline Fantastique */
+        .roadmap-section {
+            background: linear-gradient(180deg, #1a1b3e 0%, #0c0b1d 100%);
+        }
+
+        .roadmap-timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 50px 0;
+        }
+
+        .roadmap-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--magic-purple), var(--magic-blue));
+            box-shadow: 0 0 20px rgba(106, 17, 203, 0.5);
+        }
+
+        .roadmap-item {
+            width: 45%;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .roadmap-item:nth-child(odd) {
+            margin-left: auto;
+        }
+
+        .roadmap-item:nth-child(even) {
+            margin-right: auto;
+        }
+
+        .roadmark-content {
+            background: rgba(26, 27, 62, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(106, 17, 203, 0.3);
+            transition: var(--transition-slow);
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+
+        .roadmark-content:hover {
+            transform: scale(1.05);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 15px 30px rgba(0, 243, 255, 0.2);
+        }
+
+        .roadmark-point {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(45deg, var(--magic-purple), var(--magic-blue));
+            border-radius: 50%;
+            top: 30px;
+            box-shadow: 0 0 20px rgba(106, 17, 203, 0.8);
+            animation: pointPulse 2s infinite;
+        }
+
+        .roadmap-item:nth-child(odd) .roadmark-point {
+            right: -12px;
+        }
+
+        .roadmap-item:nth-child(even) .roadmark-point {
+            left: -12px;
+        }
+
+        @keyframes pointPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(106, 17, 203, 0.8); }
+            50% { box-shadow: 0 0 30px rgba(0, 243, 255, 0.8); }
+        }
+
+        /* Section Équipe - Avatars Fantastiques */
+        .team-section {
+            background: radial-gradient(ellipse at center, #1a1b3e 0%, #0c0b1d 100%);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 30px;
+            background: rgba(26, 27, 62, 0.7);
+            border-radius: 20px;
+            border: 1px solid rgba(106, 17, 203, 0.3);
+            transition: var(--transition-slow);
+            backdrop-filter: blur(5px);
+        }
+
+        .team-member:hover {
+            transform: translateY(-15px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+        }
+
+        .member-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(45deg, var(--magic-purple), var(--magic-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-avatar::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 100%);
+            border-radius: 50%;
+        }
+
+        .member-info h3 {
+            color: var(--neon-cyan);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .member-role {
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Section Contact - Portail Magique */
+        .contact-section {
+            background: linear-gradient(135deg, #0c0b1d 0%, #1a1b3e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-portal {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(106, 17, 203, 0.1) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: portalRotate 30s infinite linear;
+        }
+
+        @keyframes portalRotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .contact-container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .contact-form {
+            flex: 1;
+            background: rgba(26, 27, 62, 0.8);
+            padding: 50px;
+            border-radius: 20px;
+            border: 1px solid rgba(106, 17, 203, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: var(--neon-cyan);
+            font-weight: 600;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1.2rem;
+            background: rgba(12, 11, 29, 0.7);
+            border: 1px solid rgba(106, 17, 203, 0.5);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            transition: var(--transition-fast);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+        }
+
+        textarea.form-input {
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        /* Footer Mystique */
+        .footer {
+            background: #0a0919;
+            padding: 4rem 0 2rem;
+            border-top: 1px solid rgba(106, 17, 203, 0.3);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        .footer-text {
+            color: #a0a0d0;
+            max-width: 400px;
+        }
+
+        .social-portal {
+            display: flex;
+            gap: 20px;
+            margin-top: 2rem;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(26, 27, 62, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon-cyan);
+            font-size: 1.3rem;
+            transition: var(--transition-slow);
+            border: 1px solid rgba(106, 17, 203, 0.3);
+        }
+
+        .social-icon:hover {
+            background: var(--magic-purple);
+            transform: translateY(-5px) rotate(15deg);
+            color: white;
+            box-shadow: 0 10px 20px rgba(106, 17, 203, 0.4);
+        }
+
+        .copyright {
+            text-align: center;
+            color: #7070a0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(106, 17, 203, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1100px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .history-content {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .roadmap-timeline::before {
+                left: 30px;
+            }
+            
+            .roadmap-item {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+            }
+            
+            .roadmap-item:nth-child(odd) .roadmark-point,
+            .roadmap-item:nth-child(even) .roadmark-point {
+                left: -36px;
+                right: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .main-nav ul {
+                position: fixed;
+                top: 0;
+                right: -300px;
+                width: 300px;
+                height: 100vh;
+                background: rgba(12, 11, 29, 0.95);
+                flex-direction: column;
+                padding: 100px 40px 40px;
+                transition: right 0.5s ease;
+                backdrop-filter: blur(20px);
+                border-left: 1px solid rgba(106, 17, 203, 0.3);
+            }
+            
+            .main-nav ul.active {
+                right: 0;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .plan-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .cta-container {
+                flex-direction: column;
+            }
+            
+            .cta-button {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .history-content,
+            .plan-card,
+            .contact-form {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particules en arrière-plan -->
+    <div id="particles-js"></div>
+
+    <!-- Header -->
+    <header id="main-header">
+        <div class="container header-container">
+            <div class="logo">ShadowTale</div>
+            
+            <button class="mobile-menu-btn" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav class="main-nav">
+                <ul id="navMenu">
+                    <li><a href="#home" class="nav-link">L'Épopée</a></li>
+                    <li><a href="#history" class="nav-link">L'Héritage</a></li>
+                    <li><a href="#plan" class="nav-link">La Renaissance</a></li>
+                    <li><a href="#visuals" class="nav-link">Les Visions</a></li>
+                    <li><a href="#roadmap" class="nav-link">La Quête</a></li>
+                    <li><a href="#team" class="nav-link">Les Artisans</a></li>
+                    <li><a href="#contact" class="nav-link">Le Conseil</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1 class="hero-title">La Renaissance de ShadowTale</h1>
+            <p class="hero-subtitle">Un MMO légendaire renaît de ses cendres. Nous embarquons dans une épopée pour ressusciter ce joyau de l'ère Flash, en préservant son âme tout en le dotant de la magie des technologies modernes.</p>
+            <div class="cta-container">
+                <a href="#contact" class="cta-button cta-primary">Rejoindre la Légende</a>
+                <a href="#history" class="cta-button cta-secondary">Découvrir l'Héritage</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Histoire -->
+    <section id="history" class="section history-section">
+        <div class="container">
+            <h2 class="section-title">L'Héritage Oublié</h2>
+            <div class="history-content">
+                <div class="history-text">
+                    <h3>Une Épopée Numérique</h3>
+                    <p>Au crépuscule de l'ère Flash, ShadowTale émergea comme une constellation dans la nuit numérique. Ce MMO captiva des milliers d'âmes aventurières dans un univers où magie et technologie s'entremêlaient.</p>
+                    <p>Pendant près d'une décennie, royaumes furent bâtis, alliances scellées, et légendes écrites dans le code même du jeu. Puis vint le déclin, lent et inexorable, emportant avec lui un pan entier de l'histoire du jeu vidéo.</p>
+                    <p>Aujourd'hui, nous brandissons l'étendard de la renaissance. Notre quête : extraire l'essence de ShadowTale de l'obsolescence et la faire briller à nouveau, plus éclatante que jamais.</p>
+                </div>
+                <div class="history-visual">
+                    <div class="crystal-container">
+                        <div class="crystal"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Plan -->
+    <section id="plan" class="section plan-section">
+        <div class="container">
+            <h2 class="section-title">La Grande Renaissance</h2>
+            <div class="plan-cards">
+                <div class="plan-card">
+                    <div class="plan-icon">
+                        <i class="fas fa-hat-wizard"></i>
+                    </div>
+                    <h3>Migration Arcane</h3>
+                    <p>Transmutation du code Flash en incantations HTML5 et WebGL. Le grimoire original sera préservé, mais les formules seront optimisées pour les navigateurs modernes.</p>
+                </div>
+                
+                <div class="plan-card">
+                    <div class="plan-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Visions Amplifiées</h3>
+                    <p>Les paysages pixelisés de jadis seront transfigurés en panoramas 4K. Chaque texture, chaque sortilège visuel sera réinventé dans une résolution digne des écrans contemporains.</p>
+                </div>
+                
+                <div class="plan-card">
+                    <div class="plan-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Réseaux Enchantés</h3>
+                    <p>Les anciens serveurs seront remplacés par des architectures cloud élastiques, permettant à des milliers de joueurs d'interagir simultanément sans latence ni rupture.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Visuals -->
+    <section id="visuals" class="section visuals-section">
+        <div class="container">
+            <h2 class="section-title">Grimoire Visuel</h2>
+            <div class="visual-gallery">
+                <div class="visual-item">
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Nouveaux Royaumes" class="visual-img">
+                    <div class="visual-overlay">
+                        <h3>Les Royaumes Réinventés</h3>
+                        <p>Environnements réimaginés avec une fidélité graphique inédite</p>
+                    </div>
+                </div>
+                
+                <div class="visual-item">
+                    <img src="https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Personnages Légendaires" class="visual-img">
+                    <div class="visual-overlay">
+                        <h3>Héros Légendaires</h3>
+                        <p>Designs de personnages enrichis avec animations cinématiques</p>
+                    </div>
+                </div>
+                
+                <div class="visual-item">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Interface Mystique" class="visual-img">
+                    <div class="visual-overlay">
+                        <h3>Interface Enchantée</h3>
+                        <p>UI/UX repensée avec effets visuels magiques et interactions fluides</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Roadmap -->
+    <section id="roadmap" class="section roadmap-section">
+        <div class="container">
+            <h2 class="section-title">La Quête Technique</h2>
+            <div class="roadmap-timeline">
+                <div class="roadmap-item">
+                    <div class="roadmark-content">
+                        <h3>Étape 1 : L'Archéologie Numérique</h3>
+                        <p>Déchiffrement des anciens parchemins de code, cartographie de l'architecture originale et préparation des rituels de migration.</p>
+                        <div class="roadmark-point"></div>
+                    </div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmark-content">
+                        <h3>Étape 2 : Forge du Nouveau Moteur</h3>
+                        <p>Création du cœur technique avec WebGL et WebAssembly. Implémentation des systèmes de réseau et des bases de données.</p>
+                        <div class="roadmark-point"></div>
+                    </div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmark-content">
+                        <h3>Étape 3 : Incantations Visuelles</h3>
+                        <p>Modélisation 3D des assets, développement des environnements et intégration des effets visuels magiques.</p>
+                        <div class="roadmark-point"></div>
+                    </div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmark-content">
+                        <h3>Étape 4 : Rituel de Lancement</h3>
+                        <p>Tests alpha et bêta avec l'ancienne communauté, optimisation des performances et célébration du lancement.</p>
+                        <div class="roadmark-point"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Équipe -->
+    <section id="team" class="section team-section">
+        <div class="container">
+            <h2 class="section-title">Les Artisans de la Renaissance</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3>Lysandra Moonshadow</h3>
+                        <span class="member-role">Grande Archiviste</span>
+                        <p>Gardienne des connaissances anciennes, elle guide notre quête avec sagesse et détermination.</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3>Kaelen Runeweaver</h3>
+                        <span class="member-role">Maître des Runes Visuelles</span>
+                        <p>Ses incantations graphiques redonnent vie aux paysages et créatures de ShadowTale.</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3>Thalos Codebinder</h3>
+                        <span class="member-role">Forgeron de Code</span>
+                        <p>Il transforme les anciens sortilèges Flash en enchantements HTML5 et WebGL.</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3>Seraphina Quickblade</h3>
+                        <span class="member-role">Championne du Gameplay</span>
+                        <p>Ancienne héroïne de ShadowTale, elle veille à préserver l'essence du gameplay original.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section id="contact" class="section contact-section">
+        <div class="contact-portal"></div>
+        <div class="container">
+            <h2 class="section-title">Le Conseil des Anciens</h2>
+            <div class="contact-container">
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nom du Messager</label>
+                            <input type="text" id="name" class="form-input" required placeholder="Votre nom">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Parchemin de Contact</label>
+                            <input type="email" id="email" class="form-input" required placeholder="votre@courriel.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message Scellé</label>
+                            <textarea id="message" class="form-input" required placeholder="Racontez-nous votre vision pour ShadowTale..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="cta-button cta-primary">Envoyer le Message Magique</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">ShadowTale Renaissance</div>
+                    <p class="footer-text">Nous sommes des archivistes, des artisans et des rêveurs. Notre mission est de préserver les joyaux numériques du passé tout en les préparant pour l'éternité.</p>
+                    <div class="social-portal">
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2023 L'Ordre de la Renaissance ShadowTale. Tous les sorts réservés. | Cette présentation est un hommage au créateur original.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialisation des particules
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: ["#6a11cb", "#2575fc", "#00f3ff", "#ff00ff"] },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#6a11cb",
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Menu Mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Fermer le menu au clic sur un lien
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Effet de défilement sur l'en-tête
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        });
+
+        // Animation des cartes au défilement
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observer les éléments à animer
+        document.querySelectorAll('.history-content, .plan-card, .visual-item, .roadmark-content, .team-member').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(50px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+
+        // Effet de cristal interactif
+        const crystal = document.querySelector('.crystal');
+        crystal.addEventListener('mouseenter', () => {
+            crystal.style.animation = 'crystalFloat 3s infinite ease-in-out, crystalRotate 10s infinite linear';
+        });
+
+        crystal.addEventListener('mouseleave', () => {
+            crystal.style.animation = 'crystalFloat 6s infinite ease-in-out, crystalRotate 20s infinite linear';
+        });
+
+        // Formulaire magique
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitButton = contactForm.querySelector('.cta-button');
+            const originalText = submitButton.textContent;
+            
+            // Effet visuel de soumission
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sort en cours...';
+            submitButton.style.background = 'linear-gradient(45deg, #00f3ff, #2575fc)';
+            
+            // Simulation d'envoi
+            setTimeout(() => {
+                submitButton.innerHTML = '<i class="fas fa-check"></i> Message envoyé!';
+                submitButton.style.background = 'linear-gradient(45deg, #2ecc71, #27ae60)';
+                
+                // Réinitialisation après 3 secondes
+                setTimeout(() => {
+                    submitButton.textContent = originalText;
+                    submitButton.style.background = 'linear-gradient(45deg, var(--magic-purple), var(--magic-blue))';
+                    contactForm.reset();
+                }, 3000);
+            }, 2000);
+        });
+
+        // Effets sonores (optionnels - commentés par défaut)
+        /*
+        const hoverSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-magic-sparkles-300.mp3');
+        hoverSound.volume = 0.3;
+        
+        document.querySelectorAll('.cta-button, .plan-card, .visual-item').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                hoverSound.currentTime = 0;
+                hoverSound.play();
+            });
+        });
+        */
+    </script>
+</body>
+</html>
